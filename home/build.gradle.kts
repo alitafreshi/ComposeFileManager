@@ -1,7 +1,7 @@
 plugins {
     id(Plugins.androidLibrary)
     kotlin(KotlinPlugins.android)
-
+    id(KotlinPlugins.jetpack_navigation_plugin)
 }
 
 android {
@@ -74,8 +74,17 @@ dependencies {
     androidTestImplementation(ComposeTest.compose_junit)
     debugImplementation(ComposeTest.compose_manifest_ui)
 
+
+    //JETPACK-NAVIGATION
+    implementation(Navigation.navigation_fragments)
+    implementation(Navigation.navigation_kotlin_ui)
+
+
     //TEST LIBS
     testImplementation(GeneralTest.junit)
     androidTestImplementation(GeneralTest.ext_junit)
     androidTestImplementation(GeneralTest.espresso_core)
+
+    //CORE-UI
+    implementation(project(":core:ui"))
 }

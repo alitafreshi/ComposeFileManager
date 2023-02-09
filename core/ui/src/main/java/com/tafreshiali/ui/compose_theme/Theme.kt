@@ -1,4 +1,4 @@
-package com.tafreshiali.filemanager.ui.theme
+package com.tafreshiali.ui.compose_theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.MaterialTheme

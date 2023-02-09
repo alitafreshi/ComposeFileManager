@@ -1,4 +1,4 @@
-package com.tafreshiali.filemanager.ui.theme
+package com.tafreshiali.ui.compose_theme
 
 import androidx.compose.material.Typography
 import androidx.compose.ui.text.TextStyle
