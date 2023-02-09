@@ -4,7 +4,8 @@ plugins {
 }
 
 android {
-    namespace = Application.appId
+    //namespace = Application.appId
+    namespace = "com.tafreshiali.ui"
 
     compileSdk = Application.compileSdk
 

@@ -18,6 +18,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.tafreshiali.home.R
 
 
 @Composable
@@ -59,7 +60,7 @@ fun CustomLinearProgressbarComponent(
 fun CustomLinearProgressbarComponentPreview() {
     CustomLinearProgressbarComponent(
         progressCount = 0.5F,
-        iconId = com.tafreshiali.filemanager.R.drawable.ic_play,
+        iconId = R.drawable.ic_play,
         title = "Video",
         backgroundColor = Color.Black,
         progressBackGroundColor = Color.Blue,
@@ -94,7 +95,7 @@ fun LinearProgressbarTitleComponent(
 @Composable
 fun LinearProgressbarTitleComponentPreview() {
     LinearProgressbarTitleComponent(
-        iconId = com.tafreshiali.filemanager.R.drawable.ic_play,
+        iconId = R.drawable.ic_play,
         title = "Video"
     )
 }

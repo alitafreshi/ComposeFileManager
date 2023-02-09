@@ -5,7 +5,8 @@ plugins {
 }
 
 android {
-    namespace = Application.appId
+    //namespace = Application.appId
+    namespace = "com.tafreshiali.home"
 
     compileSdk = Application.compileSdk
     defaultConfig {

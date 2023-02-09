@@ -10,6 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.tafreshiali.home.R
 
 @Composable
 fun StorageCompleteGeneralInfoComponent(
@@ -44,7 +45,7 @@ fun StorageCompleteGeneralInfoComponent(
             ) {
                 CustomLinearProgressbarComponent(
                     progressCount = 0.5F,
-                    iconId = com.tafreshiali.filemanager.R.drawable.ic_play,
+                    iconId = R.drawable.ic_play,
                     title = "Video",
                     progressBackGroundColor = Color.Blue,
                     progressbarHeight = 8.dp
@@ -52,7 +53,7 @@ fun StorageCompleteGeneralInfoComponent(
 
                 CustomLinearProgressbarComponent(
                     progressCount = 0.7F,
-                    iconId = com.tafreshiali.filemanager.R.drawable.ic_play,
+                    iconId =  R.drawable.ic_play,
                     title = "Documents",
                     progressBackGroundColor = Color.Yellow,
                     progressbarHeight = 8.dp
@@ -61,7 +62,7 @@ fun StorageCompleteGeneralInfoComponent(
 
                 CustomLinearProgressbarComponent(
                     progressCount = 0.3F,
-                    iconId = com.tafreshiali.filemanager.R.drawable.ic_play,
+                    iconId =  R.drawable.ic_play,
                     title = "Music",
                     progressBackGroundColor = Color.Red,
                     progressbarHeight = 8.dp
