@@ -14,23 +14,17 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.tafreshiali.home.R
 
-
 @Composable
 fun CustomLinearProgressbarComponent(
     modifier: Modifier = Modifier,
-    progressCount: Float,
-    iconId: Int,
-    title: String,
-    backgroundColor: Color = Color.White,
-    progressBackGroundColor: Color,
-    progressbarHeight: Dp = 17.dp,
-    progressBarShape: Shape = RoundedCornerShape(9.dp),
+    customLinearProgressbarProperties: CustomLinearProgressbarProperties
 ) {
     Row(
         modifier = modifier.fillMaxWidth(),
@@ -39,18 +33,12 @@ fun CustomLinearProgressbarComponent(
     ) {
         LinearProgressbarTitleComponent(
             modifier = Modifier.weight(1F),
-            iconId = iconId,
-            title = title,
-            horizontalArrangementMode = Arrangement.spacedBy(5.dp),
+            linearProgressbarTitleProperties = customLinearProgressbarProperties.linearProgressbarTitleProperties
         )
 
         LinearProgressbarComponent(
             modifier = Modifier.weight(1F),
-            progressCount = progressCount,
-            backgroundColor = backgroundColor,
-            progressBackGroundColor = progressBackGroundColor,
-            progressbarHeight = progressbarHeight,
-            progressBarShape = progressBarShape
+            linearProgressbarProperties = customLinearProgressbarProperties.linearProgressbarProperties
         )
     }
 }
@@ -59,76 +47,99 @@ fun CustomLinearProgressbarComponent(
 @Composable
 fun CustomLinearProgressbarComponentPreview() {
     CustomLinearProgressbarComponent(
-        progressCount = 0.5F,
-        iconId = R.drawable.ic_play,
-        title = "Video",
-        backgroundColor = Color.Black,
-        progressBackGroundColor = Color.Blue,
-
+        customLinearProgressbarProperties = CustomLinearProgressbarProperties(
+            linearProgressbarTitleProperties = LinearProgressbarTitleProperties(
+                iconId = R.drawable.ic_play,
+                title = "Video",
+                titleTextStyle = TextStyle(color = Color.White),
+                horizontalArrangementMode = Arrangement.spacedBy(5.dp)
+            ),
+            linearProgressbarProperties = LinearProgressbarProperties(
+                backgroundColor = Color.Black,
+                progressbarHeight = 15.dp,
+                progressCount = 0.5F,
+                progressBackGroundColor = Color.Blue,
+                progressBarShape = RoundedCornerShape(9.dp)
+            )
         )
+
+    )
 }
+
+data class CustomLinearProgressbarProperties(
+    val linearProgressbarTitleProperties: LinearProgressbarTitleProperties,
+    val linearProgressbarProperties: LinearProgressbarProperties
+)
 
 
 @Composable
 fun LinearProgressbarTitleComponent(
     modifier: Modifier = Modifier,
-    iconId: Int,
-    title: String,
-    horizontalArrangementMode: Arrangement.Horizontal = Arrangement.SpaceAround
+    linearProgressbarTitleProperties: LinearProgressbarTitleProperties
 ) {
     Row(
         modifier = modifier.fillMaxWidth(),
         verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = horizontalArrangementMode
+        horizontalArrangement = linearProgressbarTitleProperties.horizontalArrangementMode
     ) {
         Image(
             modifier = Modifier.size(24.dp),
-            painter = painterResource(id = iconId),
+            painter = painterResource(id = linearProgressbarTitleProperties.iconId),
             contentDescription = "Icon"
         )
 
-        Text(text = title, color = Color.White, fontSize = 10.sp)
+        Text(
+            text = linearProgressbarTitleProperties.title,
+            style = linearProgressbarTitleProperties.titleTextStyle
+        )
     }
 }
 
-@Preview(showBackground = true )
+@Preview(showBackground = true)
 @Composable
 fun LinearProgressbarTitleComponentPreview() {
     LinearProgressbarTitleComponent(
-        iconId = R.drawable.ic_play,
-        title = "Video"
+        linearProgressbarTitleProperties = LinearProgressbarTitleProperties(
+            iconId = R.drawable.ic_play,
+            title = "Video",
+            titleTextStyle = TextStyle(color = Color.White, fontSize = 10.sp),
+            horizontalArrangementMode = Arrangement.SpaceAround
+        )
     )
 }
+
+data class LinearProgressbarTitleProperties(
+    val iconId: Int,
+    val title: String,
+    val titleTextStyle: TextStyle,
+    val horizontalArrangementMode: Arrangement.Horizontal
+)
 
 
 @Composable
 fun LinearProgressbarComponent(
     modifier: Modifier = Modifier,
-    backgroundColor: Color = Color.Black,
-    progressBackGroundColor: Color = Color.Blue,
-    progressbarHeight: Dp = 17.dp,
-    progressBarShape: Shape = RoundedCornerShape(9.dp),
-    progressCount: Float
+    linearProgressbarProperties: LinearProgressbarProperties
 ) {
     Box(
         modifier = modifier
             .fillMaxWidth()
-            .height(progressbarHeight)
+            .height(linearProgressbarProperties.progressbarHeight)
     ) {
         // for the background of the ProgressBar
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .clip(progressBarShape)
-                .background(backgroundColor)
+                .clip(linearProgressbarProperties.progressBarShape)
+                .background(linearProgressbarProperties.backgroundColor)
         )
         // for the progress of the ProgressBar
         Box(
             modifier = Modifier
-                .fillMaxWidth(progressCount)
+                .fillMaxWidth(linearProgressbarProperties.progressCount)
                 .fillMaxHeight()
-                .clip(progressBarShape)
-                .background(progressBackGroundColor)
+                .clip(linearProgressbarProperties.progressBarShape)
+                .background(linearProgressbarProperties.progressBackGroundColor)
                 .animateContentSize()
         )
     }
@@ -137,5 +148,21 @@ fun LinearProgressbarComponent(
 @Preview(showBackground = true)
 @Composable
 fun LinearProgressbarPreview() {
-    LinearProgressbarComponent(progressCount = 0.6F)
+    LinearProgressbarComponent(
+        linearProgressbarProperties = LinearProgressbarProperties(
+            backgroundColor = Color.Black,
+            progressbarHeight = 15.dp,
+            progressCount = 0.5F,
+            progressBackGroundColor = Color.Blue,
+            progressBarShape = RoundedCornerShape(9.dp)
+        )
+    )
 }
+
+data class LinearProgressbarProperties(
+    val backgroundColor: Color,
+    val progressBackGroundColor: Color,
+    val progressbarHeight: Dp,
+    val progressBarShape: Shape,
+    val progressCount: Float
+)

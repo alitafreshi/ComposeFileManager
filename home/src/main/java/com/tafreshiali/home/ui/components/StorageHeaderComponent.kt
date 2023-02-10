@@ -1,5 +1,6 @@
 package com.tafreshiali.home.ui.components
 
+import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
@@ -11,16 +12,15 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.tafreshiali.home.R
 
-
 @Composable
 fun StorageHeaderComponent(
     modifier: Modifier = Modifier,
-    headerIcon: Int = R.drawable.ic_storage_status,
-    title: String
+    headerState: StorageHeaderState
 ) {
     Row(
         modifier = modifier.fillMaxWidth(),
@@ -29,16 +29,28 @@ fun StorageHeaderComponent(
     ) {
         Image(
             modifier = Modifier.size(24.dp),
-            painter = painterResource(id = headerIcon),
+            painter = painterResource(id = headerState.headerIcon),
             contentDescription = "Header Icon"
         )
 
-        Text(text = title, color = Color.White)
+        Text(text = headerState.title, style = headerState.titleFontsStyle)
     }
 }
 
 @Preview(showBackground = true)
 @Composable
 fun StorageHeaderComponentPreview() {
-    StorageHeaderComponent(title = "Phone Storage Info")
+    StorageHeaderComponent(
+        headerState = StorageHeaderState(
+            headerIcon = R.drawable.ic_storage_status,
+            title = "Phone Storage Info",
+            titleFontsStyle = TextStyle(color = Color.White)
+        )
+    )
 }
+
+data class StorageHeaderState(
+    @DrawableRes val headerIcon: Int,
+    val title: String,
+    val titleFontsStyle: TextStyle
+)
